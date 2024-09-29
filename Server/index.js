@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://student-data-set-managment-forntend.onrender.com",
+      "https://student-dataset-managment.onrender.com",
     ],
     credentials: true,
   })
