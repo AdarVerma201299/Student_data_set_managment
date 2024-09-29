@@ -1,0 +1,67 @@
+.slider-container {
+  overflow: hidden; /* Hide cards that move out of view */
+  position: relative;
+  width: 100%;
+  padding: 20px;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease; /* Smooth sliding effect */
+  will-change: transform; /* Optimize for smoothness */
+}
+
+.slide {
+  flex: 0 0 auto; /* Prevent shrinking */
+  margin-right: 20px; /* Space between cards */
+  width: 200px; /* Set a fixed width for each card */
+}
+
+@media (max-width: 768px) {
+  .slide {
+    width: 150px; /* Adjust width for smaller screens */
+  }
+}
+
+.custom-card {
+  padding: 0.5rem;
+  width: 300px;
+  height: auto;
+  background: linear-gradient(212deg, rgba(255, 255, 0, 1) 0%, rgba(0, 188, 212, 1) 22%, rgba(103, 58, 183, 1) 69%, rgba(238, 130, 238, 1) 100%);
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fav-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.fav-icon {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  color: red;
+  font-size: 1.5rem;
+}
+
+.icon-img {
+  max-width: 50%;
+  height: auto;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.custom-card:hover .icon-img {
+  transform: scale(1.2);
+  filter: grayscale(50%) sepia(100%) hue-rotate(90deg) saturate(500%);
+}

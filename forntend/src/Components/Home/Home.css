@@ -1,0 +1,31 @@
+.loginButton:hover{
+  scale: 1.1;
+} 
+
+img{
+  width: 30rem;
+}
+@media (max-width: 480px) {
+    .image-col {
+      margin-top: 20px; 
+    }
+  
+    .form-col {
+      text-align: center; 
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .form-col {
+      text-align: left; 
+    }
+  
+    h1 {
+      font-size: 2.5rem; 
+    }
+  }
+  

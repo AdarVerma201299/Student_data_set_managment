@@ -1,0 +1,32 @@
+.BoxContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    position: relative;
+    perspective: 1000px; /* For 3D effect */
+  }
+  
+  .RotatingBox {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    border: 3px solid black;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: -150px 0; /* This sets the rotation radius */
+    animation: rotateInCircle 5s infinite linear;
+  }
+  
+  /* Keyframes for rotating in a circular path */
+  @keyframes rotateInCircle {
+    0% {
+      transform: rotate(0deg) translate(150px 0 150px); /* 150px radius */
+    }
+    100% {
+      transform: rotate(360deg) translate(150px 0 150px); /* Full 360-degree rotation */
+    }
+  }
+  

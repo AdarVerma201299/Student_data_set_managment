@@ -1,0 +1,90 @@
+/* Profile.css */
+
+
+
+@media (max-width: 768px) {
+/* For tablets and small devices */
+
+
+.card-title {
+    font-size: 1.5rem; /* Decrease font size for smaller screens */
+}
+
+.img-fluid {
+    width: 120px;
+    height: 120px; /* Adjust profile image size */
+}
+
+.ListGroup-item {
+    font-size: 0.9rem; /* Reduce font size for list items */
+}
+}
+
+@media (max-width: 576px) {
+/* For mobile devices */
+.container {
+    padding: 5px;
+}
+
+.card-title {
+    font-size: 1.2rem; /* Further reduce font size */
+}
+
+.img-fluid {
+    width: 100px;
+    height: 100px; /* Further reduce profile image size */
+}
+
+.ListGroup-item {
+    font-size: 0.8rem; /* Further reduce font size for list items */
+}
+}
+
+@media (min-width: 992px) {
+/* For larger screens */
+.container {
+    max-width: 100%;
+}
+
+.img-fluid {
+    width: 200px;
+    height: 200px; /* Larger profile image for bigger screens */
+}
+}
+.textarea-container {
+width: 100%; /* Ensures the container takes full width */
+}
+
+.textarea-container textarea {
+width: 100%; /* Ensures the textarea takes full width of its container */
+resize: vertical; /* Allows the textarea to be resized vertically, but not horizontally */
+box-sizing: border-box; /* Ensures padding and border are included in the width calculation */
+}
+
+
+.text-muted {
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+  .text-muted[style*="all 0.3s ease-in-out"] {
+    max-height: 200px; /* Adjust as needed */
+  }
+  
+
+  .PopUpELement{
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .aadhar-card-img {
+    width: 300px;
+    height: auto;
+  }
+  

@@ -1,0 +1,46 @@
+
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  footer h5 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  footer p {
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    footer h5 {
+      font-size: 1.1rem;
+    }
+  
+    footer p {
+      font-size: 0.9rem;
+    }
+  
+    footer .col-md-4 {
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* For mobile phones */
+  @media (max-width: 576px) {
+    footer h5 {
+      font-size: 1rem;
+    }
+  
+    footer p {
+      font-size: 0.85rem;
+    }
+  
+    footer .col-md-4 {
+      margin-bottom: 15px;
+    }
+  }
+  
