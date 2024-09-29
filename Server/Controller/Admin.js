@@ -103,6 +103,7 @@ const hanldeAdminLogin = async (req, res) => {
 };
 const hanldeAdminSignUp = async (req, res) => {
   const errors = validationResult(req.body.email);
+  alert("aa gaya mai ");
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array(), success: false });
   }
