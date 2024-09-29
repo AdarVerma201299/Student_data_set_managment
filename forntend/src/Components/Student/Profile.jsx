@@ -190,7 +190,7 @@ function Profile() {
     setshowAadhar(!showAadhar);
   };
   const verifyToken = studentDetails.Verify_tocken;
-
+console.log(ImageUrlSet(studentDetails.Image));
   return (
     <>
       <Container
@@ -256,6 +256,7 @@ function Profile() {
               <Card.Body className="text-center" style={{ fontSize: "80%" }}>
                 <Row>
                   <Col className="justify-content-center align-content-center">
+
                     <img
                       src={ImageUrlSet(studentDetails.Image)}
                       alt="Profile"

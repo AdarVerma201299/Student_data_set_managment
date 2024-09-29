@@ -1,4 +1,4 @@
-const ServerUrl = "http://localhost:5000/api";
+const ServerUrl = "https://student-data-set-managment.onrender.com/api";
 
 const LoginUrl = {
   Student: `${ServerUrl}/login`,
@@ -332,7 +332,7 @@ const updateUserData = (key, attributeName, attributeValue) => {
 const ImageUrlSet = (imagePath) => {
   if (imagePath) {
     const formattedImagePath = imagePath.replace(/\\/g, "/");
-    return `http://localhost:5000${
+    return `https://student-data-set-managment.onrender.com${
       formattedImagePath.startsWith("/") ? "" : "/"
     }${formattedImagePath}`;
   }
