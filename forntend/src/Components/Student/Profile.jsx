@@ -256,6 +256,7 @@ console.log(ImageUrlSet(studentDetails.Image));
               <Card.Body className="text-center" style={{ fontSize: "80%" }}>
                 <Row>
                   <Col className="justify-content-center align-content-center">
+                    <p>={ImageUrlSet(studentDetails.Image)}</p>
                     <img
                       src={ImageUrlSet(studentDetails.Image)}
                       alt="Profile"
