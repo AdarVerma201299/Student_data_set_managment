@@ -332,7 +332,7 @@ const updateUserData = (key, attributeName, attributeValue) => {
 const ImageUrlSet = (imagePath) => {
   if (imagePath) {
     const formattedImagePath = imagePath.replace(/\\/g, "/");
-    return `https://student-data-set-managment.onrender.com/${
+    return `https://student-data-set-managment.onrender.com${
       formattedImagePath.startsWith("/") ? "" : "/"
     }${formattedImagePath}`;
   }
