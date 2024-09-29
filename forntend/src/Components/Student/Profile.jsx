@@ -190,7 +190,7 @@ function Profile() {
     setshowAadhar(!showAadhar);
   };
   const verifyToken = studentDetails.Verify_tocken;
-
+console.log(ImageUrlSet(studentDetails.Image));
   return (
     <>
       <Container
