@@ -109,6 +109,7 @@ const hanldeAdminSignUp = async (req, res) => {
   const { email, name, password } = req.body;
   try {
     const existingAdmin = await Admin.findOne({ Email: email, userId: name });
+
     if (!existingAdmin) {
       return res
         .status(400)
@@ -250,57 +251,6 @@ const handleShiftFeeEntry = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
-// const UpadateShiftFeeEntry = async (req, res) => {
-//   const { adminId, id } = req.params;
-//   const { shift, Fee } = req.body;
-//   if (
-//     !mongoose.Types.ObjectId.isValid(id) ||
-//     !mongoose.Types.ObjectId.isValid(adminId)
-//   ) {
-//     return res
-//       .status(400)
-//       .json({ error: "Invalid User or Admin ID", success: false });
-//   }
-//   if (!shift || !Fee) {
-//     return res
-//       .status(400)
-//       .json({ error: "Shift and Fee fields are required", success: false });
-//   }
-
-//   try {
-//     const AdminStatus = await Admin.findById(adminId);
-//     const UserStatus = await User.findById(id);
-//     const EnterStatus = await ShiftFee.findOne({ UserId: id });
-//     console.log(EnterStatus);
-//     if (AdminStatus && UserStatus && EnterStatus) {
-//       const updateResult = await ShiftFee.updateOne(
-//         { _id: EnterStatus._id },
-//         { $set: { Shift: shift, Fee: Fee } }
-//       );
-//       if (updateResult.matchedCount > 0) {
-//         const updatedData = await ShiftFee.findById(EnterStatus._id);
-//         return res.status(201).json({
-//           message: "Shift fee entry successfully updated",
-//           success: true,
-//           data: updatedData,
-//         });
-//       } else {
-//         return res.status(400).json({
-//           error: "User not found or shift fee entry not updated",
-//           success: false,
-//         });
-//       }
-//     } else if (!EnterStatus) {
-//     } else {
-//       return res
-//         .status(404)
-//         .json({ error: "Admin or User not found", success: false });
-//     }
-//   } catch (error) {
-//     console.error("Error saving shift fee data:", error);
-//     res.status(500).send("Server error");
-//   }
-// };
 
 const GetShiftFeeDataByUseId = async (req, res) => {
   const { id } = req.params;

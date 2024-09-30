@@ -1,31 +1,25 @@
-.loginButton:hover{
-  scale: 1.1;
-} 
+@media (max-width: 768px) {
+  .loginButton {
+    width: 80%; /* Adjust width for smaller screens */
+    margin-top: 20px; /* Add spacing above the button */
+  }
 
-img{
-  width: 30rem;
+  h1 {
+    font-size: 2rem; /* Adjust font size for small screens */
+  }
+
+  p {
+    font-size: 1rem; /* Adjust font size for paragraphs */
+    padding: 0 15px; /* Add padding to avoid text touching edges */
+  }
 }
-@media (max-width: 480px) {
-    .image-col {
-      margin-top: 20px; 
-    }
-  
-    .form-col {
-      text-align: center; 
-    }
-  
-    h1 {
-      font-size: 1.8rem;
-    }
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1.8rem; /* Further reduce font size for very small screens */
   }
-  
-  @media (min-width: 1024px) {
-    .form-col {
-      text-align: left; 
-    }
-  
-    h1 {
-      font-size: 2.5rem; 
-    }
+
+  p {
+    font-size: 0.9rem; /* Further reduce paragraph size */
   }
-  
+}

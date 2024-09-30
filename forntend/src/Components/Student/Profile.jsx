@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
 import {
   Container,
   Row,
@@ -8,6 +8,7 @@ import {
   ListGroup,
   Table,
   Button,
+  Modal,
   Badge,
 } from "react-bootstrap";
 import "./Profile.css";
@@ -190,40 +191,32 @@ function Profile() {
     setshowAadhar(!showAadhar);
   };
   const verifyToken = studentDetails.Verify_tocken;
-console.log(ImageUrlSet(studentDetails.Image));
+  console.log(ImageUrlSet(studentDetails.Image));
   return (
     <>
       <Container
         class="justify-content-center align-items-center"
         style={{ marginTop: "2rem", minHeight: "30rem" }}
       >
-        <div className={`PopUpELement ${showAadhar ? "d-block" : "d-none"}`}>
-          <span
-            onClick={handlshowaadhar}
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "end",
-              color: "red",
-              cursor: "pointer",
-            }}
-          >
-            <i class="bi bi-x-lg"></i>
-          </span>
-          <div className="d-flex justify-content-center align-content-center">
+        <Modal show={showAadhar} onHide={handlshowaadhar} centered>
+          <Modal.Header closeButton className="border-0">
+            <Modal.Title className="fs-5">Aadhaar Card Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="d-flex justify-content-center align-items-center gap-3 p-3">
             <img
               src={ImageUrlSet(studentDetails?.Aadhar?.FrontAadharCardImage)}
               alt="Front of Aadhaar card"
-              className="img-fluid mb-2 aadhar-card-img"
+              className="img-fluid rounded shadow-sm"
+              style={{ maxWidth: "40%" }}
             />
             <img
               src={ImageUrlSet(studentDetails?.Aadhar?.BackAadharCardImage)}
               alt="Back of Aadhaar card"
-              className="img-fluid mb-2 aadhar-card-img"
+              className="img-fluid rounded shadow-sm"
+              style={{ maxWidth: "40%" }}
             />
-          </div>
-        </div>
+          </Modal.Body>
+        </Modal>
 
         {adminId && ShitfFee ? (
           <>
@@ -256,14 +249,12 @@ console.log(ImageUrlSet(studentDetails.Image));
               <Card.Body className="text-center" style={{ fontSize: "80%" }}>
                 <Row>
                   <Col className="justify-content-center align-content-center">
-
                     <img
                       src={ImageUrlSet(studentDetails.Image)}
                       alt="Profile"
-                      className="img-fluid rounded-circle mb-2"
-                      style={{ width: "10rem", height: "10rem" }}
+                      className="img-fluid rounded-circle"
                     />
-                    <p
+                    <strong
                       style={{
                         fontWeight: "bold",
                         color: "green",
@@ -271,7 +262,7 @@ console.log(ImageUrlSet(studentDetails.Image));
                       }}
                     >
                       Student
-                    </p>
+                    </strong>
                   </Col>
                   <Col className=" justify-content-center align-content-center text-start ">
                     <h3>{studentDetails.name}</h3>
@@ -293,72 +284,47 @@ console.log(ImageUrlSet(studentDetails.Image));
                   <strong>School/College Name: </strong>
                   <span>{studentDetails.School}</span>
                 </p>
-                <Row>
-                  <Col>
-                    <strong
-                      onClick={handleResidentalAddress}
-                      style={{
-                        color: ResidentalAddress ? "green" : "black",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      Residental Address
-                      {ResidentalAddress ? (
-                        <FaChevronUp style={{ marginLeft: "5px" }} />
-                      ) : (
-                        <FaChevronDown style={{ marginLeft: "5px" }} />
-                      )}
-                    </strong>
-                  </Col>
+                <ListGroup>
+                  <ListGroup.Item
+                    action
+                    onClick={handleResidentalAddress}
+                    style={{
+                      cursor: "pointer",
+                      color: ResidentalAddress ? "green" : "black",
+                    }}
+                  >
+                    Residental Address
+                    {ResidentalAddress && (
+                      <div>
+                        {studentDetails?.ResidentalAddress?.village},{" "}
+                        {studentDetails?.ResidentalAddress?.post},{" "}
+                        {studentDetails?.ResidentalAddress?.district},{" "}
+                        {studentDetails?.ResidentalAddress?.state},{" "}
+                        {studentDetails?.ResidentalAddress?.country}
+                      </div>
+                    )}
+                  </ListGroup.Item>
+                  <ListGroup.Item
+                    action
+                    onClick={handlePermanetAddress}
+                    style={{
+                      cursor: "pointer",
+                      color: PermanentAddress ? "green" : "black",
+                    }}
+                  >
+                    Permanent Address
+                    {PermanentAddress && (
+                      <div>
+                        {studentDetails?.PermanentAddress?.village},{" "}
+                        {studentDetails?.PermanentAddress?.post},{" "}
+                        {studentDetails?.PermanentAddress?.district},{" "}
+                        {studentDetails?.PermanentAddress?.state},{" "}
+                        {studentDetails?.PermanentAddress?.country}
+                      </div>
+                    )}
+                  </ListGroup.Item>
+                </ListGroup>
 
-                  <Col>
-                    <strong
-                      onClick={handlePermanetAddress}
-                      style={{
-                        color: PermanentAddress ? "green" : "black",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      Permanent Address
-                      {PermanentAddress ? (
-                        <FaChevronUp style={{ marginLeft: "5px" }} />
-                      ) : (
-                        <FaChevronDown style={{ marginLeft: "5px" }} />
-                      )}
-                    </strong>
-                  </Col>
-                </Row>
-
-                <Row>
-                  {ResidentalAddress ? (
-                    <p>
-                      {studentDetails?.ResidentalAddress?.village || "N/A"},
-                      {studentDetails?.ResidentalAddress?.post || "N/A"},
-                      <br />
-                      {studentDetails?.ResidentalAddress?.district || "N/A"},
-                      {studentDetails?.ResidentalAddress?.state || "N/A"},
-                      {studentDetails?.ResidentalAddress?.country || "N/A"}
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                  {PermanentAddress ? (
-                    <p>
-                      {studentDetails?.PermanentAddress?.village || "N/A"},
-                      {studentDetails?.PermanentAddress?.post || "N/A"},
-                      <br />
-                      {studentDetails?.PermanentAddress?.district || "N/A"},
-                      {studentDetails?.PermanentAddress?.state || "N/A"},
-                      {studentDetails?.PermanentAddress?.country || "N/A"}
-                    </p>
-                  ) : (
-                    ""
-                  )}
-                </Row>
                 <Row>
                   <strong>Contact Details:</strong>
                   <Col>
@@ -372,7 +338,9 @@ console.log(ImageUrlSet(studentDetails.Image));
                 </Row>
 
                 {localStorage.getItem("User") === "Admin" && verifyToken ? (
-                  <Button onClick={hanldeRemove}>Remove Student</Button>
+                  <Button variant="danger" onClick={hanldeRemove}>
+                    <i class="bi bi-trash"></i> Remove Student
+                  </Button>
                 ) : (
                   ""
                 )}
@@ -405,8 +373,8 @@ console.log(ImageUrlSet(studentDetails.Image));
                         </ListGroup.Item>
                         <ListGroup.Item>
                           {localStorage.getItem("User") === "Admin" ? (
-                            <Button onClick={hanldefeePay}>
-                              Make A Payment
+                            <Button variant="success" onClick={hanldefeePay}>
+                              Make a Payment
                             </Button>
                           ) : (
                             ""
@@ -425,7 +393,10 @@ console.log(ImageUrlSet(studentDetails.Image));
                           </ListGroup.Item>
                           {localStorage.getItem("User") === "Admin" ? (
                             <ListGroup.Item>
-                              <Button onClick={handleShiftFee}>
+                              <Button
+                                variant="outline-danger"
+                                onClick={handleShiftFee}
+                              >
                                 Update Shift and Fee
                               </Button>
                             </ListGroup.Item>
@@ -454,18 +425,27 @@ console.log(ImageUrlSet(studentDetails.Image));
                   }}
                 >
                   {PaymentRecordTable.length > 0 ? (
-                    <Table striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Payment Date</th>
-                          <th>From</th>
-                          <th>to</th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>{PaymentRecordTable}</tbody>
-                    </Table>
+                    <div
+                      style={{
+                        maxHeight: "200px",
+                        overflowY: "auto",
+                        borderRadius: "10px",
+                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <Table striped bordered hover responsive>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Payment Date</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>{PaymentRecordTable}</tbody>
+                      </Table>
+                    </div>
                   ) : (
                     ""
                   )}

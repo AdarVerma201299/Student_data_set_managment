@@ -17,6 +17,7 @@ import DisplayMsg from "./MassageBox/DisplayMsg";
 import FeePayment from "./Admin/AdminCanDo/FeePayment";
 import AdminProfile from "./Admin/AdminProfile";
 import ShiftTime from "./ShiftingTime/ShiftTime";
+import Typewriter from "./Asseste/WelcomeWord/Typewriter";
 export {
   Home,
   Footer,
@@ -37,4 +38,5 @@ export {
   AdminProfile,
   FeePayment,
   ShiftTime,
+  Typewriter,
 };

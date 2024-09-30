@@ -6,15 +6,12 @@ import {
   FeeAndPaymentRecord,
   handleFeePayment,
 } from "../../Function";
+import { BiX } from "react-icons/bi"; // Importing icons for better UI
 
 function FeePayment(props) {
-  const { key } = useParams();
   const formatDateToInput = (dateString) => {
     const date = new Date(dateString);
-    if (!isNaN(date)) {
-      return date.toISOString().split("T")[0];
-    }
-    return "";
+    return !isNaN(date) ? date.toISOString().split("T")[0] : "";
   };
 
   const [formData, setFormData] = useState({
@@ -22,6 +19,7 @@ function FeePayment(props) {
     EndDate: "",
     Payment: "",
   });
+
   const [totalMonths, setTotalMonths] = useState(0);
   const { id } = useParams();
 
@@ -47,11 +45,13 @@ function FeePayment(props) {
       }
     }
   };
+
   const getMinEndDate = () => {
     const startDate = new Date(formData.startDate);
     startDate.setDate(startDate.getDate() + 1);
     return startDate.toISOString().split("T")[0];
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     FeeAndPaymentRecord(id, formData);
@@ -62,49 +62,58 @@ function FeePayment(props) {
   if (!props.feePay) {
     return null; // Don't render if feePay is false
   }
-  console.log("key", key);
+
   return (
-    <div className="bg-gray">
-      <div className="PopUpELement">
-        <Card className="SuccessMsg d-flex justify-content-center align-content-center">
-          <span
-            onClick={() => {
-              props.setfeePay(false);
-            }}
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "end",
-              color: "red",
-              cursor: "pointer",
-            }}
-          >
-            <i class="bi bi-x-lg"></i>
-          </span>
-          <form
-            className="border m-3 p-4 shadow-sm rounded"
-            onSubmit={handleSubmit}
-          >
-            <Row>
-              <p>Payment Date</p>
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{
+        height: "100vh",
+        width: "100vw",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 1050, // Ensure it's above other content
+        backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+      }}
+    >
+      <Card
+        className="shadow-lg rounded"
+        style={{ width: "100%", maxWidth: "500px", position: "relative" }}
+      >
+        <span
+          onClick={() => props.setfeePay(false)}
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "red",
+            cursor: "pointer",
+            position: "absolute",
+            top: "15px",
+            right: "15px",
+          }}
+        >
+          <BiX />
+        </span>
+        <Card.Body>
+          <h4 className="text-center mb-4">Fee Payment</h4>
+          <form onSubmit={handleSubmit}>
+            <Row className="mb-3">
               <Col md={6}>
-                <Form.Group controlId="formstartDate" className="mb-3 d-flex">
-                  <Form.Label>From:</Form.Label>
+                <Form.Group controlId="formstartDate">
+                  <Form.Label>Payment Date From:</Form.Label>
                   <Form.Control
-                    className="ContentSilde"
                     type="date"
                     name="startDate"
                     value={formData.startDate}
                     readOnly // Disable this field since it's pre-filled
+                    className="bg-light"
                   />
                 </Form.Group>
               </Col>
               <Col md={6}>
-                <Form.Group controlId="formEndDate" className="mb-3 d-flex">
-                  <Form.Label>To:</Form.Label>
+                <Form.Group controlId="formEndDate">
+                  <Form.Label>Payment Date To:</Form.Label>
                   <Form.Control
-                    className="ml-3 ContentSilde"
                     type="date"
                     name="EndDate"
                     value={formData.EndDate}
@@ -115,31 +124,26 @@ function FeePayment(props) {
                 </Form.Group>
               </Col>
             </Row>
-            <Row>
+            <Row className="mb-3">
               {totalMonths > 0 && (
                 <>
                   <Col>
-                    <Form.Group
-                      controlId="formMonthlyFee"
-                      className="d-flex justify-content-between mb-3"
-                    >
-                      <Form.Label className="mb-0 me-2 flex-shrink-0">
-                        Payment:
-                      </Form.Label>
+                    <Form.Group controlId="formMonthlyFee">
+                      <Form.Label>Payment:</Form.Label>
                       <Form.Control
                         type="text"
                         name="Payment"
-                        placeholder="Enter Monthly Fee"
                         value={formData.Payment}
                         readOnly
+                        className="bg-light"
                       />
                     </Form.Group>
                   </Col>
-                  <Col>
-                    <p>{`Total Months: ${totalMonths}`}</p>
+                  <Col className="d-flex align-items-center">
+                    <p className="mb-0">{`Total Months: ${totalMonths}`}</p>
                   </Col>
                   <Col>
-                    <Button className="ContentSilde" type="submit">
+                    <Button variant="primary" type="submit" className="w-100">
                       Submit
                     </Button>
                   </Col>
@@ -147,8 +151,8 @@ function FeePayment(props) {
               )}
             </Row>
           </form>
-        </Card>
-      </div>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

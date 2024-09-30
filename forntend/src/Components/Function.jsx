@@ -1,4 +1,4 @@
-const ServerUrl = "https://student-data-set-managment.onrender.com/api";
+const ServerUrl = "http://localhost:5000/api";
 
 const LoginUrl = {
   Student: `${ServerUrl}/login`,
@@ -12,10 +12,9 @@ const RegitrationUrl = {
 
 const handleRegistationSubmit = async (e, formData, Type) => {
   e.preventDefault();
-
   if (formData.Security.password !== formData.Security.confirmPassword) {
     alert("Passwords do not match");
-    return;
+    return false;
   }
 
   try {
@@ -35,26 +34,21 @@ const handleRegistationSubmit = async (e, formData, Type) => {
       );
       form.append("userId", formData.Security.userId);
     }
-
     if (formData.Document.image) {
       form.append("image", formData.Document.image);
     }
-
     if (formData.Document.FrontAadharCardImage) {
       form.append(
         "FrontAadharCardImage",
         formData.Document.FrontAadharCardImage
       );
     }
-
     if (formData.Document.BackAadharCardImage) {
       form.append("BackAadharCardImage", formData.Document.BackAadharCardImage);
     }
-
     form.append("residential", JSON.stringify(formData.residential));
     form.append("permanent", JSON.stringify(formData.permanent));
     form.append("password", formData.Security.password);
-
     const response = await fetch(RegitrationUrl[Type], {
       method: "POST",
       body: form,
@@ -68,13 +62,17 @@ const handleRegistationSubmit = async (e, formData, Type) => {
           ? json.errors.map((err) => err.msg).join(", ")
           : json.error || "An unknown error occurred";
         alert(errorMessages);
+        return false;
       }
     } else {
-      alert("An error occurred: " + json.error);
+      const errorMessage = json.error || "An unknown error occurred";
+      alert("An error occurred: " + errorMessage);
+      return false;
     }
   } catch (error) {
     console.error("Error:", error.message);
     alert("Error occurred while processing your request");
+    return false;
   }
 };
 
@@ -86,7 +84,6 @@ const handleloginSubmit = async (e, formData, user) => {
       password: formData.password,
       email: formData.email,
     };
-    console.log(form);
     const response = await fetch(LoginUrl[user], {
       method: "POST",
       headers: {
@@ -332,7 +329,7 @@ const updateUserData = (key, attributeName, attributeValue) => {
 const ImageUrlSet = (imagePath) => {
   if (imagePath) {
     const formattedImagePath = imagePath.replace(/\\/g, "/");
-    return `https://student-data-set-managment.onrender.com${
+    return `http://localhost:5000${
       formattedImagePath.startsWith("/") ? "" : "/"
     }${formattedImagePath}`;
   }

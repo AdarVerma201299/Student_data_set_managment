@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Dropdown, Button, Row, Col } from "react-bootstrap";
+import { FaCheck, FaTimes, FaUser } from "react-icons/fa"; // Using Font Awesome icons
 import {
   handleShiftFee,
   updateUserData,
@@ -24,11 +25,13 @@ function ShiftAllot({ setShitfFee, verifyToken, PendingMonthFee }) {
 
   const { adminId, id, key } = useParams();
   const [Status, setStatus] = useState(verifyToken);
+
   const hanldeStatusOfUser = async () => {
     const res = await verifyStudentUserBYAdmin(id);
     setStatus(res);
     updateUserData(key, "Verify_tocken", res);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -62,32 +65,48 @@ function ShiftAllot({ setShitfFee, verifyToken, PendingMonthFee }) {
   };
 
   return (
-    <div className="PopUpELement">
-      <Card className="SuccessMsg d-flex justify-content-center align-content-center p-2">
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{
+        height: "100vh",
+        width: "100vw",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 1050, // Ensure it's above other content
+        backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+      }}
+    >
+      <Card
+        className="p-4 shadow-lg rounded"
+        style={{ width: "90%", maxWidth: "500px" }}
+      >
         <span
-          onClick={() => {
-            setShitfFee(false);
-          }}
+          onClick={() => setShitfFee(false)}
           style={{
-            fontSize: "1rem",
-            display: "flex",
-            justifyContent: "end",
+            fontSize: "1.5rem",
+            color: "red",
             cursor: "pointer",
+            position: "absolute",
+            top: "15px",
+            right: "15px",
           }}
         >
-          <i class="bi bi-x-lg"></i>
+          <FaTimes />
         </span>
+
         {PendingMonthFee && PendingMonthFee > 0 ? (
           <p
-            className="border p-4 shadow-sm rounded"
+            className="border p-3 rounded text-danger text-center"
             style={{ fontWeight: "bold" }}
           >
-            {" "}
-            Firstly Say to Clear User to Clear {PendingMonthFee} month Fee{" "}
+            <FaUser className="me-2" />
+            First, tell the user to clear {PendingMonthFee} month(s) fee.
           </p>
         ) : (
           <>
             <p
+              className="mb-3 text-center"
               style={{
                 fontWeight: "bold",
                 color: Status ? "green" : "red",
@@ -95,64 +114,58 @@ function ShiftAllot({ setShitfFee, verifyToken, PendingMonthFee }) {
               }}
               onClick={hanldeStatusOfUser}
             >
-              {!Status ? "UnActive User" : "User Are Activeted"}
+              {Status ? <FaCheck /> : <FaTimes />}{" "}
+              {Status ? "User Activated" : "Inactive User"}
             </p>
 
             <form
               className="border p-4 shadow-sm rounded"
-              action="Post"
               onSubmit={handleSubmit}
             >
               <Row>
                 <Col md={6}>
-                  <Form.Group
-                    controlId="formMonthlyFee"
-                    className="d-flex justify-content-between mb-3"
-                  >
-                    <Form.Label className="mb-0 me-2 flex-shrink-0">
-                      Monthly Fee:
-                    </Form.Label>
+                  <Form.Group controlId="formMonthlyFee" className="mb-3">
+                    <Form.Label>Monthly Fee:</Form.Label>
                     <Form.Control
-                      className="ContentSilde"
                       type="text"
                       name="MonthlyFee"
                       placeholder="Enter Monthly Fee"
                       value={formData.MonthlyFee}
                       onChange={handleChange}
                       required
+                      className="border-dark"
                     />
                   </Form.Group>
                 </Col>
-                <Col md={4}>
-                  <Form.Group controlId="formShift" className="d-flex  mb-3">
-                    <Form.Label className="mb-0 me-2 flex-shrink-0">
-                      Shift:
-                    </Form.Label>
-                    <Dropdown className="ContentSilde">
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <Col md={6}>
+                  <Form.Group controlId="formShift" className="mb-3">
+                    <Form.Label>Shift:</Form.Label>
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant="success"
+                        id="dropdown-basic"
+                        className="w-100"
+                      >
                         {formData.shifts ? formData.shifts : "Choose Shift"}
                       </Dropdown.Toggle>
-
                       <Dropdown.Menu>
                         {shifts.map((option, index) => (
                           <Dropdown.Item
                             key={index}
-                            onClick={() => toggleShift(option)} // Handle single selection
+                            onClick={() => toggleShift(option)}
                           >
                             {option}
-                            {formData.shifts === option && " ✔"}{" "}
-                            {/* Show checkmark if selected */}
+                            {formData.shifts === option && " ✔"}
                           </Dropdown.Item>
                         ))}
                       </Dropdown.Menu>
                     </Dropdown>
                   </Form.Group>
                 </Col>
-                <Col md={2}>
-                  {" "}
-                  <Button type="Submit">Submit</Button>
-                </Col>
               </Row>
+              <Button type="submit" variant="primary" className="w-100">
+                Submit
+              </Button>
             </form>
           </>
         )}

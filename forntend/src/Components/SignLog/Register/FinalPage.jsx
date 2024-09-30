@@ -48,6 +48,9 @@ function FinalPage({
       const mssg = await handleRegistationSubmit(e, formData, Type);
       setmsg(mssg);
       if (mssg) navigate("/");
+      else {
+        alert("Registration failed or was incomplete.");
+      }
     } else {
       alert(`${passwordError}`);
     }

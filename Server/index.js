@@ -19,6 +19,7 @@ app.use(
       "http://localhost:3000",
       "https://student-dataset-managment.onrender.com",
     ],
+    methods: ["GET", "POST"],
     credentials: true,
   })
 );

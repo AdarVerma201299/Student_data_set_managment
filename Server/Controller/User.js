@@ -63,6 +63,7 @@ const handleUserSignUp = async (req, res) => {
     aadhaar,
     password,
   } = req.body;
+  console.log(req.body);
   if (!aadhaar) {
     return res.status(400).json({
       success: false,

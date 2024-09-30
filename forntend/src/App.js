@@ -9,6 +9,7 @@ import {
   Profile,
   AdminDashboard,
   Register,
+  Typewriter,
 } from "./Components/Index";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <Nbr />
+        <Typewriter text="!! Hello My Website !!" speed={300} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
