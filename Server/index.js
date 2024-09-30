@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 // app.use(cors());
 app.use(
   cors({
+    '/Uploads', express.static('Uploads'),
     origin: [
       "http://localhost:3000",
       "https://student-dataset-managment.onrender.com",
