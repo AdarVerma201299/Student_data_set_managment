@@ -261,7 +261,9 @@ function Profile() {
                         cursor: "pointer",
                       }}
                     >
+                      <p>{ ImageUrlSet(studentDetails.Image)}</p>
                       Student
+                      <p> {studentDetails.Image}</p>
                     </strong>
                   </Col>
                   <Col className=" justify-content-center align-content-center text-start ">
